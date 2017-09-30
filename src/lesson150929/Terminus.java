@@ -1,6 +1,5 @@
 package lesson150929;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Scanner;
@@ -45,6 +44,7 @@ public class Terminus {
                 if (line.equalsIgnoreCase(anno)) {
                     try {
                         method.invoke(null, null);
+                        return;
                     } catch (IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
                     }
