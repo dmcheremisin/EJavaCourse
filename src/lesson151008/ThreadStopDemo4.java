@@ -3,33 +3,27 @@ package lesson151008;
 /**
  * Created by dmitr on 03.10.2017.
  */
-public class ThreadStopDemo {
+public class ThreadStopDemo4 {
 
     static class Task implements Runnable {
-        private volatile boolean stopped;
 
         @Override
         public void run() {
             long i = 0;
-            while(!stopped){
+            while(!Thread.interrupted()){
                 i++;
-                if (i % 10000 == 0) {
-                    Thread.yield();
-                }
             }
             System.out.println(i);
-        }
-        public void stop(){
-            stopped = true;
         }
     }
 
     public static void main(String[] args) {
         System.out.println("START");
         Task task = new Task();
-        new Thread(task).start();
+        Thread thread = new Thread(task);
+        thread.start();
         Utils.pause(5000);
-        task.stop();
+        thread.interrupt();
         System.out.println("FINISH");
     }
 
