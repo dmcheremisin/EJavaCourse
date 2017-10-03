@@ -16,7 +16,7 @@ public class HomeWork {
         process(matrix);
         long stop = System.nanoTime();
 
-        System.out.println("Elapsed = " + (stop - start));
+        System.out.println("Process = " + (stop - start));
     }
 
     private static void process(double[][] matrix) {
@@ -48,7 +48,7 @@ public class HomeWork {
 
     private static double[][] generate() {
         Random random = new Random();
-        double[][] matrix = new double[10][8_000_000];
+        double[][] matrix = new double[10][1_000_000];
         for (int i=0; i < matrix.length; i++) {
             for (int j=0; j < matrix[i].length; j++) {
                 matrix[i][j] = random.nextDouble();
