@@ -16,17 +16,24 @@ public class UseRunners {
         Lock lock = new ReentrantLock(true);
         Condition condition = lock.newCondition();
 
-        Runner runner1 = new Runner(lock, condition);
-        Runner runner2 = new Runner(lock, condition);
-        Runner runner3 = new Runner(lock, condition);
+        lock.lock();
+        try {
+            Runner runner1 = new Runner(lock, condition);
+            Runner runner2 = new Runner(lock, condition);
+            Runner runner3 = new Runner(lock, condition);
 
-        Thread thread1 = new Thread(runner1, "Runner1");
-        Thread thread2 = new Thread(runner2, "Runner2");
-        Thread thread3 = new Thread(runner3, "Runner3");
+            Thread thread1 = new Thread(runner1, "Runner1");
+            Thread thread2 = new Thread(runner2, "Runner2");
+            Thread thread3 = new Thread(runner3, "Runner3");
 
-        thread1.start();
-        thread2.start();
-        thread3.start();
+            thread1.start();
+            thread2.start();
+            thread3.start();
+
+            Utils.pause(1000);
+        } finally {
+            lock.unlock();
+        }
 
         Utils.pause(1000);
 
