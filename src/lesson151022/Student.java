@@ -4,7 +4,31 @@ package lesson151022;
  * Created by Dmitrii on 07.10.2017.
  */
 public class Student {
-    int id;
+    String id;
     String name;
-    int stip;
+    String stip;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStip() {
+        return stip;
+    }
+
+    public void setStip(String stip) {
+        this.stip = stip;
+    }
 }

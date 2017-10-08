@@ -6,8 +6,8 @@ package lesson151022;
 public class UseDb {
 
     public static void main(String[] args) {
-        int id = 10;
-        Student t = DbManager.get(id);
+        int id = 1;
+        Student t = DbManager.get(Student.class, id);
         if ( t == null ) {
             System.out.println("No such student with id = " + id);
         } else {
