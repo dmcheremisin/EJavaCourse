@@ -1,3 +1,5 @@
+package lesson151027;
+
 import lesson151027.Stack;
 import org.junit.Test;
 

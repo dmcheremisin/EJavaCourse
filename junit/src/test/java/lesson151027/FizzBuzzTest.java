@@ -1,3 +1,5 @@
+package lesson151027;
+
 import lesson151027.FizzBuzz;
 import org.junit.Before;
 import org.junit.Test;
