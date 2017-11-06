@@ -14,15 +14,12 @@ public class FileChangeCharset {
         try (InputStreamReader ir = new InputStreamReader(new FileInputStream(FILE_UTF8), "UTF-8");
              OutputStreamWriter ow = new OutputStreamWriter(new FileOutputStream(FILE_UTF16), "UTF-16")) {
             BufferedReader bufferedReader = new BufferedReader(ir);
-            BufferedWriter bufferedWriter = new BufferedWriter(ow);
             String line;
             while((line = bufferedReader.readLine()) != null ){
-                bufferedWriter.write(line);
-                bufferedWriter.write("\n");
+                ow.write(line);
+                ow.write("\n");
             }
             bufferedReader.close();
-            bufferedWriter.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
