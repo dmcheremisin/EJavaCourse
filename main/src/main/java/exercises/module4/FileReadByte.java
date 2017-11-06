@@ -50,7 +50,7 @@ public class FileReadByte {
         return words;
     }
 
-    private static Map<String, Integer> sortWordsAndCount(List<String> words) {
+    public static Map<String, Integer> sortWordsAndCount(List<String> words) {
         Map<String, Integer> wordsMap = new HashMap<>();
         words.forEach(word -> {
                     if (wordsMap.containsKey(word)) {
