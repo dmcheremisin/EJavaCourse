@@ -12,10 +12,12 @@ import java.util.regex.Pattern;
 public class ArticleMatcher {
 
     private static Pattern picPattern = Pattern.compile("(Рис. (\\d))");
-    private static final String FILE = "C:\\Workspace\\EpamJava\\main\\src\\main\\resources\\article.html";
+    private static final String FILE = "article.html";
 
     public static void main(String[] args) {
-        File file = new File(FILE);
+        ArticleMatcher articleMatcher = new ArticleMatcher();
+        ClassLoader classLoader = articleMatcher.getClass().getClassLoader();
+        File file = new File(classLoader.getResource(FILE).getFile());
         String s;
         List<String> lines = new ArrayList<>();
         try(BufferedReader in = new BufferedReader(new InputStreamReader(
