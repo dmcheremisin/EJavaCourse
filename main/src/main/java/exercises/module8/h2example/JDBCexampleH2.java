@@ -1,4 +1,4 @@
-package exercises.module8;
+package exercises.module8.h2example;
 
 import java.sql.*;
 
@@ -6,11 +6,11 @@ import java.sql.*;
  * Created by Dmitrii on 21.11.2017.
  */
 public class JDBCexampleH2 {
-    private static final Connection c = getConnection();
+    private static final Connection c = getConnection("jdbc:h2:mem:");
 
-    public static Connection getConnection() {
+    public static Connection getConnection(String connection) {
         try {
-            return DriverManager.getConnection("jdbc:h2:mem:");
+            return DriverManager.getConnection(connection);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
