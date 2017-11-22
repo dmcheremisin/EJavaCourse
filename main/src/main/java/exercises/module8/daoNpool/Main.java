@@ -1,8 +1,9 @@
 package exercises.module8.daoNpool;
 
+
 import exercises.module8.daoNpool.dao.impl.H2SqlDaoFactory;
 import exercises.module8.daoNpool.dao.interfaces.DaoFactory;
-import exercises.module8.daoNpool.dao.interfaces.GroupDao;
+import exercises.module8.daoNpool.dao.interfaces.GenericDao;
 import exercises.module8.daoNpool.dao.models.Group;
 
 import java.sql.Connection;
@@ -15,65 +16,48 @@ import java.util.List;
 
 /**
  * @author Dmitrii
- * Date: 22.11.2017
- * Time: 15:57
+ *         Date: 22.11.2017
+ *         Time: 15:57
  */
 public class Main {
 
     private static Connection c;
 
     private static final String CREATE_TABLE =
-            "CREATE SCHEMA IF NOT EXISTS  `daotalk`;" +
+            "CREATE SCHEMA IF NOT EXISTS  DAOTALK;" +
+            "SET SCHEMA DAOTALK; " +
+            //"DROP TABLE IF EXISTS GROUPS ; " +
 
-            "SET SCHEMA `daotalk`; " +
+            "CREATE  TABLE IF NOT EXISTS GROUPS (" +
+            "id INT NOT NULL AUTO_INCREMENT ," +
+            "number INT NOT NULL ," +
+            "department VARCHAR(45) NULL ," +
+            "PRIMARY KEY (id) );" +
 
-            "DROP TABLE IF EXISTS `Group` ; " +
+            //"DROP TABLE IF EXISTS STUDENT ; " +
 
-            "CREATE  TABLE IF NOT EXISTS `Group` (" +
-            "  `id` INT NOT NULL AUTO_INCREMENT ," +
-            "  `number` INT NOT NULL ," +
-            "  `department` VARCHAR(45) NULL ," +
-            "  PRIMARY KEY (`id`) );" +
-
-            "DROP TABLE IF EXISTS `Student` ; " +
-
-            "CREATE  TABLE IF NOT EXISTS `Student` (" +
-            "  `id` INT NOT NULL AUTO_INCREMENT ," +
-            "  `name` VARCHAR(45) NULL ," +
-            "  `surname` VARCHAR(45) NULL ," +
-            "  `enrolment_date` DATE NULL ," +
-            "  `group_id` INT ," +
-            "  PRIMARY KEY (`id`) );";
+            "CREATE  TABLE IF NOT EXISTS STUDENT (" +
+            "id INT NOT NULL AUTO_INCREMENT ," +
+            "name VARCHAR(45) NULL ," +
+            "surname VARCHAR(45) NULL ," +
+            "enrolment_date DATE NULL ," +
+            "group_id INT ," +
+            "PRIMARY KEY (id)," +
+            "FOREIGN KEY (group_id) REFERENCES GROUPS(id));";
 
     private static final String ADD_SAMPLE_DATA =
-            "INSERT INTO `Group` (`number`, `department`)" +
-            "VALUES ('230750', 'Кибернетики');" +
-            "INSERT INTO `Group` (`number`, `department`) " +
-            "VALUES ('320890', 'Естественнонаучный');" +
-            "INSERT INTO `Group` (`number`, `department`) " +
-            "VALUES ('440120', 'Экономики');" +
-            "" +
-            "INSERT INTO `Student` (`surname`, `name`, `enrolment_date`, `group_id`) " +
-            "VALUES ('Ступенько', 'Василий', '2010-09-01', '1');" +
-            "INSERT INTO `Student` (`surname`, `name`, `enrolment_date`, `group_id`) " +
-            "VALUES ('Ступенько', 'Наталья', '2010-09-01', '1');" +
-            "INSERT INTO `Student` (`surname`, `name`, `enrolment_date`, `group_id`) " +
-            "VALUES ('Иванов', 'Николай', '2005-09-01', '1');" +
-            "INSERT INTO `Student` (`surname`, `name`, `enrolment_date`, `group_id`) " +
-            "VALUES ('Петрова', 'Анастасия', '2007-09-01', '1');" +
-            "" +
-            "INSERT INTO `Student` (`surname`, `name`, `enrolment_date`, `group_id`) " +
-            "VALUES ('Васильева', 'Валентина', '2010-09-01', '2');" +
-            "INSERT INTO `Student` (`surname`, `name`, `enrolment_date`, `group_id`) " +
-            "VALUES ('Цапко', 'Игорь', '2010-09-01', '2');" +
-            "" +
-            "INSERT INTO `Student` (`surname`, `name`, `enrolment_date`, `group_id`) " +
-            "VALUES ('Кузницова', 'Светлана', '2010-09-01', '3');" +
-            "INSERT INTO `Student` (`surname`, `name`, `enrolment_date`, `group_id`) " +
-            "VALUES ('Прокопенко', 'Ольга', '2010-09-01', '3');" +
-            "" +
-            "INSERT INTO `Student` (`surname`, `name`, `enrolment_date`) " +
-            "VALUES ('Новиков', 'Жан', '2010-09-01');";
+            "INSERT INTO GROUPS VALUES (NULL, '230750', 'Кибернетики');" +
+            "INSERT INTO GROUPS VALUES (NULL, '320890', 'Естественнонаучный');" +
+            "INSERT INTO GROUPS VALUES (NULL, '440120', 'Экономики');" +
+            "INSERT INTO STUDENT VALUES (NULL, 'Ступенько', 'Василий', '2010-09-01', '1');" +
+            "INSERT INTO STUDENT VALUES (NULL, 'Ступенько', 'Наталья', '2010-09-01', '1');" +
+            "INSERT INTO STUDENT VALUES (NULL, 'Иванов', 'Николай', '2005-09-01', '1');" +
+            "INSERT INTO STUDENT VALUES (NULL, 'Петрова', 'Анастасия', '2007-09-01', '1');" +
+            "INSERT INTO STUDENT VALUES (NULL, 'Васильева', 'Валентина', '2010-09-01', '2');" +
+            "INSERT INTO STUDENT VALUES (NULL, 'Цапко', 'Игорь', '2010-09-01', '2');" +
+            "INSERT INTO STUDENT VALUES (NULL, 'Кузницова', 'Светлана', '2010-09-01', '3');" +
+            "INSERT INTO STUDENT VALUES (NULL, 'Прокопенко', 'Ольга', '2010-09-01', '3');" +
+            "INSERT INTO STUDENT VALUES (NULL, 'Новиков', 'Жан', '2010-09-01', NULL);";
 
     public static Connection getConnection(String connection) {
         try {
@@ -87,16 +71,16 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        //prepareData();
         DaoFactory df = new H2SqlDaoFactory();
         List<Group> list = null;
         try(Connection c = df.getConnection()){
-            GroupDao groupDao = df.getGroupDao(c);
+            GenericDao<Group> groupDao = df.getGroupDao(c);
             list = groupDao.getAll();
         } catch (SQLException e) {
             System.out.println(e);
         }
-        System.out.println(list);
-//        prepareData();
+        list.forEach(a -> System.out.println(a.getDepartment()));
 //        testListStudents();
     }
 
@@ -119,7 +103,7 @@ public class Main {
     private static void testListStudents() {
         try {
             System.out.println(" ============== List all users ====================");
-            PreparedStatement st = c.prepareStatement("SELECT * FROM `Student`;");
+            PreparedStatement st = c.prepareStatement("SELECT * FROM Student;");
             ResultSet resultSet = st.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);

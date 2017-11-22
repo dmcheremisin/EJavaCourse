@@ -1,7 +1,7 @@
 package exercises.module8.daoNpool.dao.impl;
 
 import exercises.module8.daoNpool.dao.interfaces.DaoFactory;
-import exercises.module8.daoNpool.dao.interfaces.GroupDao;
+import exercises.module8.daoNpool.dao.interfaces.GenericDao;
 import exercises.module8.daoNpool.dao.models.Group;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class H2SqlGroupDaoTest {
         DaoFactory df = new H2SqlDaoFactory();
         List<Group> list = null;
         try(Connection c = df.getConnection()){
-            GroupDao groupDao = df.getGroupDao(c);
+            GenericDao<Group> groupDao = df.getGroupDao(c);
             list = groupDao.getAll();
         } catch (Exception e) {
             System.out.println(e.getMessage());

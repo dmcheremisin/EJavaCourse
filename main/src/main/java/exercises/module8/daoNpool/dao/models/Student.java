@@ -1,5 +1,6 @@
 package exercises.module8.daoNpool.dao.models;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -9,11 +10,18 @@ import java.util.Date;
  */
 public class Student {
 
+    public Student() {
+        this.groupId = 1;
+        this.name = "";
+        this.surname = "";
+        this.enrolmentDate = LocalDate.now();
+    }
+
     private Integer id;
     private Integer groupId;
     private String name;
     private String surname;
-    private Date enrolmentDate;
+    private LocalDate enrolmentDate;
 
     public Integer getId() {
         return id;
@@ -47,11 +55,11 @@ public class Student {
         this.surname = surname;
     }
 
-    public Date getEnrolmentDate() {
+    public LocalDate getEnrolmentDate() {
         return enrolmentDate;
     }
 
-    public void setEnrolmentDate(Date enrolmentDate) {
+    public void setEnrolmentDate(LocalDate enrolmentDate) {
         this.enrolmentDate = enrolmentDate;
     }
 }

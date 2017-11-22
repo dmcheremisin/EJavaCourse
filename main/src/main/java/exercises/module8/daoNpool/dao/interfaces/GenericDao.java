@@ -1,28 +1,27 @@
 package exercises.module8.daoNpool.dao.interfaces;
 
-import exercises.module8.daoNpool.dao.models.Student;
-import java.util.List;
-/**
- * @author Dmitrii
- * Date: 22.11.2017
- * Time: 19:01
- */
+import exercises.module8.daoNpool.dao.exception.PersistException;
 
-/** Объект для управления персистентным состоянием объекта Student */
-public interface StudentDao {
+import java.sql.SQLException;
+import java.util.List;
+
+/**
+ * Created by Dmitrii on 22.11.2017.
+ */
+public interface GenericDao<T> {
 
     /** Создает новую запись и соответствующий ей объект */
-    public Student create();
+    public T create() throws PersistException;
 
     /** Возвращает объект соответствующий записи с первичным ключом key или null */
-    public Student read(int key);
+    public T read(int key) throws PersistException;
 
-    /** Сохраняет состояние объекта group в базе данных */
-    public void update(Student student);
+    /** Сохраняет состояние объекта в базе данных */
+    public void update(T group);
 
     /** Удаляет запись об объекте из базы данных */
-    public void delete(Student student);
+    public void delete(T group);
 
     /** Возвращает список объектов соответствующих всем записям в базе данных */
-    public List<Student> getAll();
+    public List<T> getAll() throws SQLException;
 }

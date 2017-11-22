@@ -1,8 +1,9 @@
 package exercises.module8.daoNpool.dao.impl;
 
 import exercises.module8.daoNpool.dao.interfaces.DaoFactory;
-import exercises.module8.daoNpool.dao.interfaces.GroupDao;
-import exercises.module8.daoNpool.dao.interfaces.StudentDao;
+import exercises.module8.daoNpool.dao.interfaces.GenericDao;
+import exercises.module8.daoNpool.dao.models.Group;
+import exercises.module8.daoNpool.dao.models.Student;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,12 +22,12 @@ public class H2SqlDaoFactory implements DaoFactory {
     }
 
     @Override
-    public GroupDao getGroupDao(Connection connection) {
+    public GenericDao<Group> getGroupDao(Connection connection) {
         return new H2SqlGroupDao(connection);
     }
 
     @Override
-    public StudentDao getStudentDao(Connection connection) {
-        return null;
+    public GenericDao<Student> getStudentDao(Connection connection) {
+        return new H2SqlStudentDao(connection);
     }
 }

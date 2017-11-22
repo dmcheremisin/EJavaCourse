@@ -10,6 +10,11 @@ public class Group {
     private int number;
     private String department;
 
+    public Group() {
+        this.number = 0;
+        this.department = "";
+    }
+
     public Integer getId() {
         return id;
     }
