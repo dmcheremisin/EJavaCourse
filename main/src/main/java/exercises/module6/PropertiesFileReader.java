@@ -30,7 +30,7 @@ public class PropertiesFileReader {
 
                 }
             } catch (Exception e) {
-                System.out.println("Can't read file:  " + fileName);
+                System.out.println("Can't get file:  " + fileName);
             }
         } catch (Exception e) {
             System.out.println("File: " + fileName + " is not found!");

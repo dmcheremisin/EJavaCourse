@@ -1,18 +1,23 @@
 package exercises.module8.daoNpool.dao.models;
 
+import exercises.module8.daoNpool.dao.interfaces.Identifiable;
+
 /**
  * @author Dmitrii
  * Date: 22.11.2017
  * Time: 19:02
  */
-public class Group {
+public class Group implements Identifiable {
     private Integer id;
     private int number;
     private String department;
 
+    public Group(int number, String department) {
+        this.number = number;
+        this.department = department;
+    }
+
     public Group() {
-        this.number = 0;
-        this.department = "";
     }
 
     public Integer getId() {

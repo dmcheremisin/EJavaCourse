@@ -1,5 +1,6 @@
 package exercises.module8.daoNpool.dao.interfaces;
 
+import exercises.module8.daoNpool.dao.exception.PersistException;
 import exercises.module8.daoNpool.dao.models.Group;
 import exercises.module8.daoNpool.dao.models.Student;
 
@@ -18,17 +19,8 @@ import java.sql.SQLException;
 public interface DaoFactory {
 
     /**
-     * Возвращает подключение к базе данных
+     * Возвращает объект для управления персистентным состоянием объекта
      */
-    public Connection getConnection() throws SQLException;
+    GenericDao getDao(Class clazz);
 
-    /**
-     * Возвращает объект для управления персистентным состоянием объекта Group
-     */
-    public GenericDao<Group> getGroupDao(Connection connection);
-
-    /**
-     * Возвращает объект для управления персистентным состоянием объекта Student
-     */
-    public GenericDao<Student> getStudentDao(Connection connection);
 }

@@ -1,5 +1,7 @@
 package exercises.module8.daoNpool.dao.models;
 
+import exercises.module8.daoNpool.dao.interfaces.Identifiable;
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -8,7 +10,7 @@ import java.util.Date;
  * Date: 22.11.2017
  * Time: 19:02
  */
-public class Student {
+public class Student implements Identifiable {
 
     public Student() {
         this.groupId = 1;
