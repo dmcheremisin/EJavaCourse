@@ -1,16 +1,15 @@
 package exercises.module8.daoNpool.dao.impl;
 
-import exercises.module8.daoNpool.dao.exception.PersistException;
 import exercises.module8.daoNpool.dao.interfaces.DaoFactory;
 import exercises.module8.daoNpool.dao.interfaces.GenericDao;
 import exercises.module8.daoNpool.dao.models.Group;
+import exercises.module8.daoNpool.pool.ConnectionPool;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -25,8 +24,8 @@ public class H2SqlGroupDaoTest {
     @Before
     public void setUp() {
         try {
-            c = DriverManager.getConnection("jdbc:h2:~/daoNpool/daotalk");
-        } catch (SQLException e) {
+            c = ConnectionPool.getConnectionFromPool();
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
