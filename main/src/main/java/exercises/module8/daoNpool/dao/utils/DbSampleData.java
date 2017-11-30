@@ -1,4 +1,4 @@
-package exercises.module8.daoNpool.dao.Utils;
+package exercises.module8.daoNpool.dao.utils;
 
 /**
  * Created by Dmitrii on 26.11.2017.
